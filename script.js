@@ -2,25 +2,28 @@ let timer = 0;
 let pause = true;
 let last = false;
 let timeout = null;
-let speed = location.hash === '#demo' ? 100 : 1;
+let speed = location.hash === '#demo' ? 1000 : 1;
 let noSleep = new NoSleep(); // empêche l'écran du téléphone de s'éteindre automatiquement
 let etape = 1;
 
 function afficher() {
-    if (timer < 20 * 60 * 1000) {
-        document.querySelector('.overlay').style.height = (timer / 1000) / (20 * 60) * 100 + '%';
+    if (timer < (30 + 20 + 60 + 20) * 60 * 1000) {
+        document.querySelector('.overlay').style.height = (timer / 1000) / ((30 + 20 + 60 + 20) * 60) * 100 + '%';
     } else {
         document.querySelector('.overlay').style.height = '100%';
-        etape === 3 && (vibrer([350, 350, 350, 350, 350]), etape = 4);
+        etape === 4 && (vibrer([350, 350, 350, 350, 350]), etape = 5);
     }
-    if (timer <= 5 * 60 * 1000) {
-        document.querySelector('.etape1').textContent = temps(5 * 60 - parseInt(timer / 1000));
-    } else if (timer <= 15 * 60 * 1000) {
+    if (timer <= 30 * 60 * 1000) {
+        document.querySelector('.etape1').textContent = temps(30 * 60 - parseInt(timer / 1000));
+    } else if (timer <= (30 + 20) * 60 * 1000) {
         etape === 1 && (vibrer(500), etape = 2);
-        document.querySelector('.etape2').textContent = temps(15 * 60 - parseInt(timer / 1000));
-    } else {
+        document.querySelector('.etape2').textContent = temps((30 + 20) * 60 - parseInt(timer / 1000));
+    } else if (timer <= (30 + 20 + 60) * 60 * 1000) {
         etape === 2 && (vibrer(500), etape = 3);
-        document.querySelector('.etape3').textContent = temps(20 * 60 - parseInt(timer / 1000));
+        document.querySelector('.etape3').textContent = temps((30 + 20 + 60) * 60 - parseInt(timer / 1000));
+    } else {
+        etape === 3 && (vibrer(500), etape = 4);
+        document.querySelector('.etape4').textContent = temps((30 + 20 + 60 + 20) * 60 - parseInt(timer / 1000));
     }
 }
 

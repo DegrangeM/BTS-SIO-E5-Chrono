@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOChrono</title>
+    <title>GOChronoBTS</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div id="chrono">
-        <div class="etape1">5:00</div>
-        <div class="etape2">10:00</div>
-        <div class="etape3">5:00</div>
+    <div class="reset">
+        <button onclick="document.getElementById('C1').contentWindow.location.reload();">Reset</button>
+        <button onclick="document.getElementById('C2').contentWindow.location.reload();">Reset</button>
     </div>
-    <div class="overlay"></div>
-    <script src="lib/NoSleep.js"></script>
-    <script src="script.js"></script>
+    <div>
+        <iframe id="C1" src="frame.html"></iframe>
+        <iframe id="C2" src="frame.html"></iframe>
+    </div>
 </body>
 
 </html>
