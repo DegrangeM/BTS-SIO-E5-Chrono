@@ -38,3 +38,11 @@ iframe {
     width:100%;
     min-width: 0px;
 }
+
+.credit {
+    height:auto;
+    padding: 5px;
+    text-align: center;
+    display: block;
+    font-size: 75%;
+}
