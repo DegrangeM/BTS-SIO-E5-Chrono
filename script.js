@@ -5,6 +5,7 @@ let timeout = null;
 let speed = location.hash === '#demo' ? 1000 : 1;
 let noSleep = new NoSleep(); // empêche l'écran du téléphone de s'éteindre automatiquement
 let etape = 1;
+let skip = false;
 
 function afficher() {
     if (timer < (30 + 20 + 60 + 20) * 60 * 1000) {
@@ -50,6 +51,10 @@ function vibrer(t) {
 }
 
 document.body.addEventListener('click', function () {
+    if (skip) {
+        skip = false;
+        return;
+    }
     vibrer(10);
     if (pause) {
         noSleep.enable();
@@ -64,4 +69,23 @@ document.body.addEventListener('click', function () {
         last = false;
         pause = true;
     }
+});
+[['etape1', 0], ['etape2', 30], ['etape3', 30 + 20], ['etape4', 30 + 20 + 60]].forEach(function (etape) {
+    [['mousedown', 'mouseup', 'mousemove'], ['touchstart', 'touchend', 'touchmove']].forEach(function (e) {
+        document.querySelector('.' + etape[0]).addEventListener(e[0], function () {
+            let mouseDownTimer = setTimeout(x => {
+                vibrer(10);
+                timer = etape[1]*60*1000;
+                skip = true;
+                afficher();
+            }, 1000);
+            this.addEventListener(e[1], function () {
+                clearTimeout(mouseDownTimer);
+            });
+
+            this.addEventListener(e[2], function () {
+                clearTimeout(mouseDownTimer);
+            });
+        });
+    });
 });
