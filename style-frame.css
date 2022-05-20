@@ -57,4 +57,5 @@ body {
     height: 0%;
     background-color: white;
     opacity: 0.9;
+    pointer-events: none;
 }
